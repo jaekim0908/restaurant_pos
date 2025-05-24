@@ -24,6 +24,8 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
+app_include_css = ["/assets/restaurant_pos/css/pos_view.css"]
+app_include_js = ["/assets/restaurant_pos/js/pos/pos_view.js"]
 # include js, css files in header of desk.html
 # app_include_css = "/assets/restaurant_pos/css/restaurant_pos.css"
 # app_include_js = "/assets/restaurant_pos/js/restaurant_pos.js"
@@ -41,6 +43,8 @@ app_license = "mit"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
+# include js in page
+page_js = {"restaurant-pos": "public/js/pos/pos_view.js"}
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
