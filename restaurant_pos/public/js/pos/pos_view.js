@@ -265,12 +265,23 @@ restaurant_pos.point_of_sale.PosView = class PosView {
         // Update content visibility
         this.layout_container.find('.pos-tab-content').removeClass('active');
         this.layout_container.find(`.pos-tab-content[data-tab="${tab}"]`).addClass('active');
+
+        // Manage Floating Action Button for mobile
+        if (this.is_mobile) {
+            if (tab === 'menu' && this.cart_items_data.length > 0) {
+                this.add_floating_cart_button(); // Ensures it's there and updated
+            } else {
+                if (this.cart_floating_button) {
+                    this.cart_floating_button.remove();
+                    this.cart_floating_button = null; // Clear the reference
+                }
+            }
+        }
     }
 
     updateMobileBadges() {
         if (!this.is_mobile) return;
 
-        // Update cart badge
         const cartCount = this.cart_items_data.length;
         const cartBadge = this.tab_nav.find('.cart-count');
         if (cartCount > 0) {
@@ -279,7 +290,6 @@ restaurant_pos.point_of_sale.PosView = class PosView {
             cartBadge.hide();
         }
 
-        // Update orders badge
         const ordersCount = this.active_orders.length;
         const ordersBadge = this.tab_nav.find('.orders-count');
         if (ordersCount > 0) {
@@ -288,23 +298,32 @@ restaurant_pos.point_of_sale.PosView = class PosView {
             ordersBadge.hide();
         }
 
-        // Update floating button badge
-        if (this.cart_floating_button) {
-            const floatingBadge = this.cart_floating_button.find('.cart-badge');
+        // Manage FAB based on cart count and active tab
+        if (this.state.activeTab === 'menu') {
             if (cartCount > 0) {
-                floatingBadge.text(cartCount).show();
+                this.add_floating_cart_button(); // Will create or update
             } else {
-                floatingBadge.hide();
+                // Cart is empty, remove button if it exists
+                if (this.cart_floating_button) {
+                    this.cart_floating_button.remove();
+                    this.cart_floating_button = null;
+                }
             }
         }
+        // If not on menu tab, FAB should have been removed by setActiveTab
     }
 
     add_floating_cart_button() {
-        // Remove existing button if any
-        $('.cart-floating-button').remove();
+        // Remove existing button if any, to prevent duplicates and handle updates
+        if (this.cart_floating_button) {
+            this.cart_floating_button.remove();
+            this.cart_floating_button = null;
+        }
 
         // Only add if we're on the menu tab and have items in cart
-        if (this.state.activeTab !== 'menu' || this.cart_items_data.length === 0) return;
+        if (!this.is_mobile || this.state.activeTab !== 'menu' || this.cart_items_data.length === 0) {
+            return; // Do not add if not on mobile, not on menu tab, or cart is empty
+        }
 
         this.cart_floating_button = $(`
             <button class="cart-floating-button">
@@ -313,10 +332,11 @@ restaurant_pos.point_of_sale.PosView = class PosView {
             </button>
         `);
 
+        // Append to body to ensure it's above other page elements as per its z-index
         $('body').append(this.cart_floating_button);
 
         this.cart_floating_button.on('click', () => {
-            this.setActiveTab('cart');
+            this.setActiveTab('cart'); // Clicking FAB takes you to cart tab
         });
     }
 
@@ -681,11 +701,6 @@ restaurant_pos.point_of_sale.PosView = class PosView {
         this.render_cart();
         this.updateMobileBadges();
 
-        // Update floating cart button in mobile
-        if (this.is_mobile && this.state.activeTab === 'menu') {
-            this.add_floating_cart_button();
-        }
-
         // Show feedback
         frappe.show_alert({
             message: `${item.name} added to cart`,
@@ -699,6 +714,10 @@ restaurant_pos.point_of_sale.PosView = class PosView {
         if (this.cart_items_data.length === 0) {
             this.cart_items.html('<div class="empty-cart"><div class="empty-cart-icon">🛒</div>Cart is empty</div>');
             this.update_cart_summary();
+            // Ensure FAB is correctly handled by updateMobileBadges if on menu tab
+            if (this.is_mobile && this.state.activeTab === 'menu') {
+                this.updateMobileBadges();
+            }
             return;
         }
 
@@ -766,13 +785,17 @@ restaurant_pos.point_of_sale.PosView = class PosView {
             'Are you sure you want to clear the cart?',
             () => {
                 this.cart_items_data = [];
-                this.render_cart();
-                this.updateMobileBadges();
+                this.render_cart(); // This will update summary
+                // this.updateMobileBadges(); // updateMobileBadges will handle FAB if on menu tab
 
-                // Remove floating button in mobile
+                // Explicitly manage FAB removal here if on menu tab, or rely on updateMobileBadges
                 if (this.is_mobile && this.cart_floating_button) {
-                    this.cart_floating_button.remove();
+                     if (this.state.activeTab === 'menu') { // Only remove if on menu tab, otherwise it should already be gone
+                        this.cart_floating_button.remove();
+                        this.cart_floating_button = null;
+                     }
                 }
+                this.updateMobileBadges(); // Call this after cart is empty to update all badges
 
                 frappe.show_alert({
                     message: 'Cart cleared',

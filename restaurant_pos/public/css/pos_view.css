@@ -277,6 +277,19 @@
     }
 }
 
+/* Ensure orientation changes are smooth */
+@media (orientation: portrait) {
+    .pos-layout-tablet.pos-layout-landscape {
+        flex-direction: column;
+    }
+}
+
+@media (orientation: landscape) {
+    .pos-layout-tablet.pos-layout-portrait {
+        flex-direction: row;
+    }
+}
+
 /* Cart floating button */
 .cart-floating-button {
     position: fixed;
