@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 09:53:48.895646",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+    "naming_series",
+    "payment_date",
+    "order",
+    "payment_method",
+    "column_break_1",
+    "amount_due",
+    "amount_paid",
+    "change_amount",
+    "items_section",
+    "items"
+  ],
+  "fields": [
+    {
+      "default": "PAY-.YYYY.-",
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Series",
+      "options": "PAY-.YYYY.-"
+    },
+    {
+      "fieldname": "payment_date",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Payment Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "order",
+      "fieldtype": "Link",
+      "label": "Order",
+      "options": "Restaurant Order"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Payment Method",
+      "options": "Cash\nCredit Card\nDebit Card\nMobile Payment\nGift Card\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amount_due",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Amount Due",
+      "reqd": 1
+    },
+    {
+      "fieldname": "amount_paid",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Amount Paid",
+      "reqd": 1
+    },
+    {
+      "fieldname": "change_amount",
+      "fieldtype": "Currency",
+      "label": "Change Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "items_section",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "POS Payment Item"
+    }
+  ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-24 09:53:48.895646",
+ "modified_by": "Administrator",
+ "module": "Restaurant Pos",
+ "name": "POS Payment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

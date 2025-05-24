@@ -1,0 +1,157 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 10:03:15.443437",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+    "item_code",
+    "item_name",
+    "category",
+    "column_break_1",
+    "unit",
+    "default_supplier",
+    "details_section",
+    "description",
+    "image",
+    "inventory_section",
+    "current_stock",
+    "reorder_level",
+    "min_order_qty",
+    "column_break_2",
+    "valuation_rate",
+    "last_purchase_rate",
+    "last_stock_update"
+  ],
+  "fields": [
+    {
+      "fieldname": "item_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Item Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "item_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Item Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Category",
+      "options": "Inventory Category",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "unit",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Unit of Measure",
+      "options": "UOM",
+      "reqd": 1
+    },
+    {
+      "fieldname": "default_supplier",
+      "fieldtype": "Link",
+      "label": "Default Supplier",
+      "options": "Supplier"
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image"
+    },
+    {
+      "fieldname": "inventory_section",
+      "fieldtype": "Section Break",
+      "label": "Inventory"
+    },
+    {
+      "default": "0",
+      "fieldname": "current_stock",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Current Stock",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "reorder_level",
+      "fieldtype": "Float",
+      "label": "Reorder Level"
+    },
+    {
+      "default": "1",
+      "fieldname": "min_order_qty",
+      "fieldtype": "Float",
+      "label": "Minimum Order Quantity"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "valuation_rate",
+      "fieldtype": "Currency",
+      "label": "Valuation Rate",
+      "read_only": 1
+    },
+    {
+      "default": "0",
+      "fieldname": "last_purchase_rate",
+      "fieldtype": "Currency",
+      "label": "Last Purchase Rate",
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_stock_update",
+      "fieldtype": "Datetime",
+      "label": "Last Stock Update",
+      "read_only": 1
+    }
+  ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-24 10:03:15.443437",
+ "modified_by": "Administrator",
+ "module": "Restaurant Pos",
+ "name": "Inventory Item",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

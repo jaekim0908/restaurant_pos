@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 09:50:23.350620",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+    "naming_series",
+    "order",
+    "table",
+    "column_break_1",
+    "creation_time",
+    "status",
+    "items_section",
+    "items"
+  ],
+  "fields": [
+    {
+      "default": "KOT-.YYYY.-",
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Series",
+      "options": "KOT-.YYYY.-"
+    },
+    {
+      "fieldname": "order",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Order",
+      "options": "Restaurant Order",
+      "reqd": 1
+    },
+    {
+      "fieldname": "table",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Table",
+      "options": "Restaurant Table",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "creation_time",
+      "fieldtype": "Datetime",
+      "label": "Creation Time",
+      "read_only": 1
+    },
+    {
+      "default": "New",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "New\nIn Progress\nCompleted\nCancelled"
+    },
+    {
+      "fieldname": "items_section",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "Kitchen Order Ticket Item"
+    }
+  ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-24 09:50:23.350620",
+ "modified_by": "Administrator",
+ "module": "Restaurant Pos",
+ "name": "Kitchen Order Ticket",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

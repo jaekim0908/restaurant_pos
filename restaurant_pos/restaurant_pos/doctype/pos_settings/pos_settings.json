@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 09:58:57.798717",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+    "general_section",
+    "restaurant_name",
+    "default_tax_rate",
+    "allow_discount",
+    "column_break_1",
+    "default_customer",
+    "default_printer",
+    "receipt_section",
+    "receipt_header",
+    "receipt_footer",
+    "column_break_2",
+    "show_tax_details",
+    "show_company_logo",
+    "user_interface_section",
+    "color_theme",
+    "item_grid_size",
+    "column_break_3",
+    "use_category_images",
+    "default_view"
+  ],
+  "fields": [
+    {
+      "fieldname": "general_section",
+      "fieldtype": "Section Break",
+      "label": "General Settings"
+    },
+    {
+      "fieldname": "restaurant_name",
+      "fieldtype": "Data",
+      "label": "Restaurant Name",
+      "reqd": 1
+    },
+    {
+      "default": "10",
+      "fieldname": "default_tax_rate",
+      "fieldtype": "Percent",
+      "label": "Default Tax Rate"
+    },
+    {
+      "default": "1",
+      "fieldname": "allow_discount",
+      "fieldtype": "Check",
+      "label": "Allow Discount"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "default_customer",
+      "fieldtype": "Link",
+      "label": "Default Customer",
+      "options": "Customer"
+    },
+    {
+      "fieldname": "default_printer",
+      "fieldtype": "Link",
+      "label": "Default Printer",
+      "options": "Printer"
+    },
+    {
+      "fieldname": "receipt_section",
+      "fieldtype": "Section Break",
+      "label": "Receipt Settings"
+    },
+    {
+      "fieldname": "receipt_header",
+      "fieldtype": "Small Text",
+      "label": "Receipt Header"
+    },
+    {
+      "fieldname": "receipt_footer",
+      "fieldtype": "Small Text",
+      "label": "Receipt Footer"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "show_tax_details",
+      "fieldtype": "Check",
+      "label": "Show Tax Details"
+    },
+    {
+      "default": "1",
+      "fieldname": "show_company_logo",
+      "fieldtype": "Check",
+      "label": "Show Company Logo"
+    },
+    {
+      "fieldname": "user_interface_section",
+      "fieldtype": "Section Break",
+      "label": "User Interface"
+    },
+    {
+      "default": "Default",
+      "fieldname": "color_theme",
+      "fieldtype": "Select",
+      "label": "Color Theme",
+      "options": "Default\nDark\nLight"
+    },
+    {
+      "default": "Medium",
+      "fieldname": "item_grid_size",
+      "fieldtype": "Select",
+      "label": "Item Grid Size",
+      "options": "Small\nMedium\nLarge"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "1",
+      "fieldname": "use_category_images",
+      "fieldtype": "Check",
+      "label": "Use Category Images"
+    },
+    {
+      "default": "Order",
+      "fieldname": "default_view",
+      "fieldtype": "Select",
+      "label": "Default View",
+      "options": "Order\nTable\nKitchen"
+    }
+  ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-24 09:58:57.798717",
+ "modified_by": "Administrator",
+ "module": "Restaurant Pos",
+ "name": "POS Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

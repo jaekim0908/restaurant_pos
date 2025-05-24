@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 10:11:06.664058",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+    "naming_series",
+    "entry_type",
+    "entry_date",
+    "reference_document",
+    "column_break_1",
+    "posted_by",
+    "remarks",
+    "items_section",
+    "items"
+  ],
+  "fields": [
+    {
+      "default": "STK-.YYYY.-",
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "hidden": 1,
+      "label": "Series",
+      "options": "STK-.YYYY.-"
+    },
+    {
+      "fieldname": "entry_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Entry Type",
+      "options": "Purchase\nSales\nConsumption\nWastage\nReturn\nAdjustment\nTransfer",
+      "reqd": 1
+    },
+    {
+      "fieldname": "entry_date",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "label": "Entry Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "reference_document",
+      "fieldtype": "Dynamic Link",
+      "label": "Reference Document",
+      "options": "reference_doctype"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "posted_by",
+      "fieldtype": "Link",
+      "label": "Posted By",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "items_section",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "Stock Entry Item",
+      "reqd": 1
+    }
+  ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-24 10:11:06.664058",
+ "modified_by": "Administrator",
+ "module": "Restaurant Pos",
+ "name": "Stock Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-24 10:18:53.243203",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+    "printer_name",
+    "printer_type",
+    "server_ip",
+    "port",
+    "column_break_1",
+    "default",
+    "description",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "printer_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Printer Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "default": "Network",
+      "fieldname": "printer_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Printer Type",
+      "options": "Network\nLocal\nUSB\nBluetooth",
+      "reqd": 1
+    },
+    {
+      "depends_on": "eval:doc.printer_type=='Network'",
+      "fieldname": "server_ip",
+      "fieldtype": "Data",
+      "label": "Server IP"
+    },
+    {
+      "depends_on": "eval:doc.printer_type=='Network'",
+      "fieldname": "port",
+      "fieldtype": "Int",
+      "label": "Port"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "default": "0",
+      "fieldname": "default",
+      "fieldtype": "Check",
+      "label": "Default"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "default": "Active",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Status",
+      "options": "Active\nInactive"
+    }
+  ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-24 10:18:53.243203",
+ "modified_by": "Administrator",
+ "module": "Restaurant Pos",
+ "name": "Printer",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
