@@ -79,15 +79,32 @@ restaurant_pos.point_of_sale.PosView = class PosView {
     }
 
     rebuildLayout() {
-        // Store important state before rebuilding
         const activeTab = this.state.activeTab;
+        // Preserve critical state that might be reset by setup_layout or init_X_sections if not careful
+        const currentCategory = this.state.currentCategory;
+        const searchTerm = this.state.searchTerm;
+        const isSearchActive = this.state.isSearchActive;
+        const cartItemsData = this.cart_items_data; // Data itself should be fine
+        const activeOrdersData = this.active_orders; // Data itself should be fine
+
         const currentScrollPositions = this.captureScrollPositions();
 
-        // Rebuild the entire layout
-        this.setup_layout();
+        this.setup_layout(); // This re-creates empty DOM sections
 
-        // Restore state after rebuilding
-        this.restoreState(activeTab, currentScrollPositions);
+        // Restore data that might have been lost if sections re-initialize their own data stores
+        // For this class, menu_items, categories, active_orders, cart_items_data are top-level properties,
+        // so they should persist. The main thing is to re-render them into the new DOM.
+
+        // Explicitly restore states that might affect rendering, if setup_layout reset them
+        this.state.currentCategory = currentCategory;
+        this.state.searchTerm = searchTerm;
+        this.state.isSearchActive = isSearchActive;
+        // this.cart_items_data = cartItemsData; // Not strictly necessary if not reassigned in setup_layout
+        // this.active_orders = activeOrdersData; // Not strictly necessary
+
+        this.reRenderDataIntoContainers(); // Call the new method
+
+        this.restoreState(activeTab, currentScrollPositions); // Restores active tab for mobile, scroll positions
     }
 
     captureScrollPositions() {
@@ -481,6 +498,52 @@ restaurant_pos.point_of_sale.PosView = class PosView {
         return "$" + parseFloat(value || 0).toFixed(2);
     }
 
+    reRenderDataIntoContainers() {
+        // Menu items and categories
+        if (this.categories && this.menu_container && this.menu_container.find('.category-selector').length) {
+            this.render_categories(this.categories); // Assumes this.state.currentCategory is preserved
+        }
+        if (this.menu_items && this.menu_container && this.menu_container.find('.menu-items-grid').length) {
+            this.render_menu_items(this.menu_items);
+
+            // Re-apply filters and selected states
+            // Ensure correct category button is selected (render_categories might handle the initial this.state.currentCategory)
+            // but if not, explicitly set it here.
+            this.category_selector.find('.category-btn').removeClass('selected');
+            const currentCategory = this.state.currentCategory || 'all';
+            this.category_selector.find(`.category-btn[data-id="${currentCategory}"]`).addClass('selected');
+
+            if (this.state.isSearchActive && this.state.searchTerm) {
+                const search_term = this.state.searchTerm.toLowerCase();
+                this.search_box.find('.search-input').val(this.state.searchTerm); // Restore search text
+                this.search_box.find('.search-clear').toggle(true); // Show clear button
+
+                this.menu_items_grid.find('.menu-item').hide();
+                this.menu_items.forEach(item => {
+                    if (item.name.toLowerCase().includes(search_term)) {
+                        this.menu_items_grid.find(`.menu-item[data-id="${item.id}"]`).show();
+                    }
+                });
+            } else {
+                this.search_box.find('.search-input').val(''); // Clear search text
+                this.search_box.find('.search-clear').toggle(false); // Hide clear button
+                this.filter_items(currentCategory);
+            }
+        }
+
+        // Active orders
+        if (this.active_orders && this.orders_container && this.orders_container.find('.active-orders-list').length) {
+            this.update_orders_view();
+        }
+
+        // Cart
+        if (this.cart_container && this.cart_container.find('.cart-items').length) {
+            this.render_cart(); // render_cart uses this.cart_items_data internally
+        }
+        
+        this.updateMobileBadges(); // Update counts on tabs/FAB
+    }
+
     load_data() {
         // Show a loading state
         this.show_loading('Loading menu...');
@@ -622,9 +685,13 @@ restaurant_pos.point_of_sale.PosView = class PosView {
             });
         });
 
-        // Select "All" by default
-        this.state.currentCategory = 'all';
-        this.category_selector.find(`.category-btn[data-id="all"]`).addClass('selected');
+        // Select the current category, or "all" if none is set or invalid
+        let catToSelect = this.state.currentCategory || 'all';
+        if (!this.categories.find(c => c.id === catToSelect)) {
+            catToSelect = 'all'; // Fallback to 'all' if currentCategory is not in the list
+        }
+        this.state.currentCategory = catToSelect; // Update state if it was changed
+        this.category_selector.find(`.category-btn[data-id="${catToSelect}"]`).addClass('selected');
     }
 
     render_menu_items(items) {
