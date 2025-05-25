@@ -24,7 +24,6 @@ app_license = "mit"
 # Includes in <head>
 # ------------------
 
-app_include_css = ["/assets/restaurant_pos/css/pos_view.css"]
 app_include_js = ["/assets/restaurant_pos/js/pos/pos_view.js"]
 # include js, css files in header of desk.html
 # app_include_css = "/assets/restaurant_pos/css/restaurant_pos.css"

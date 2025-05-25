@@ -137,7 +137,7 @@
 
 /* Cart Container */
 .pos-cart-container {
-    flex: 1;
+    flex: 2;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -503,7 +503,7 @@
 }
 
 .cart-header {
-    padding: 15px;
+    padding: 10px 15px;
     border-bottom: 1px solid var(--pos-border);
     background-color: white;
     z-index: 1;
@@ -637,7 +637,7 @@
 
 /* Cart summary improvements */
 .cart-summary {
-    padding: 15px;
+    padding: 10px 15px;
     background-color: #f8f9fa;
     border-top: 1px solid var(--pos-border);
 }
@@ -659,7 +659,7 @@
 
 /* Cart actions */
 .cart-actions {
-    padding: 15px;
+    padding: 10px 15px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
